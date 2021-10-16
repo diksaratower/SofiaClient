@@ -44,13 +44,14 @@
             this.label3 = new System.Windows.Forms.Label();
             this.screenTraslBut = new System.Windows.Forms.Button();
             this.jokesButton = new System.Windows.Forms.Button();
+            this.DisconnectBtn = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // ConnectButton
             // 
-            this.ConnectButton.Location = new System.Drawing.Point(582, 12);
+            this.ConnectButton.Location = new System.Drawing.Point(560, 14);
             this.ConnectButton.Name = "ConnectButton";
-            this.ConnectButton.Size = new System.Drawing.Size(139, 35);
+            this.ConnectButton.Size = new System.Drawing.Size(83, 35);
             this.ConnectButton.TabIndex = 0;
             this.ConnectButton.Text = "Подключить";
             this.ConnectButton.UseVisualStyleBackColor = true;
@@ -195,11 +196,22 @@
             this.jokesButton.UseVisualStyleBackColor = true;
             this.jokesButton.Click += new System.EventHandler(this.jokesButton_Click);
             // 
+            // DisconnectBtn
+            // 
+            this.DisconnectBtn.Location = new System.Drawing.Point(649, 14);
+            this.DisconnectBtn.Name = "DisconnectBtn";
+            this.DisconnectBtn.Size = new System.Drawing.Size(77, 35);
+            this.DisconnectBtn.TabIndex = 16;
+            this.DisconnectBtn.Text = "Отключить";
+            this.DisconnectBtn.UseVisualStyleBackColor = true;
+            this.DisconnectBtn.Click += new System.EventHandler(this.DisconnectBtn_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(738, 395);
+            this.Controls.Add(this.DisconnectBtn);
             this.Controls.Add(this.jokesButton);
             this.Controls.Add(this.screenTraslBut);
             this.Controls.Add(this.label3);
@@ -242,6 +254,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button screenTraslBut;
         private System.Windows.Forms.Button jokesButton;
+        private System.Windows.Forms.Button DisconnectBtn;
     }
 }
 

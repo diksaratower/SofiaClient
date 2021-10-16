@@ -53,7 +53,7 @@
             this.pathTextBox.Name = "pathTextBox";
             this.pathTextBox.Size = new System.Drawing.Size(213, 20);
             this.pathTextBox.TabIndex = 11;
-            this.pathTextBox.Text = "c:/Users/VASUS/Desktop";
+            this.pathTextBox.Text = "c:/";
             // 
             // statsLabel
             // 
