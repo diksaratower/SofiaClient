@@ -85,6 +85,12 @@
     <Compile Include="SendMsg.Designer.cs">
       <DependentUpon>SendMsg.cs</DependentUpon>
     </Compile>
+    <Compile Include="SystemInf.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SystemInf.Designer.cs">
+      <DependentUpon>SystemInf.cs</DependentUpon>
+    </Compile>
     <Compile Include="TaskMgr.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -117,6 +123,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="SendMsg.resx">
       <DependentUpon>SendMsg.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SystemInf.resx">
+      <DependentUpon>SystemInf.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TaskMgr.resx">
       <DependentUpon>TaskMgr.cs</DependentUpon>
