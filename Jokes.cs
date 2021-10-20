@@ -79,5 +79,11 @@ namespace BackdoorClient
         {
             mainForm.SendCommandAndGetResponce($"dirtyScreen $false");
         }
+
+        private void getSysInfBut_Click(object sender, EventArgs e)
+        {
+            SystemInf systemInf = new SystemInf(mainForm);
+            systemInf.Show();
+        }
     }
 }

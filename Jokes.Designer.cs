@@ -44,6 +44,7 @@
             this.blockMachine = new System.Windows.Forms.Button();
             this.unblockMachine = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
+            this.getSysInfBut = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dirtyScreenValue)).BeginInit();
             this.SuspendLayout();
             // 
@@ -206,11 +207,22 @@
             this.label5.TabIndex = 15;
             this.label5.Text = "Мышка встаёт в 0, 0 дисп. отключен,\r\nвсе ока свёрнуты, рабочего стола нет";
             // 
+            // getSysInfBut
+            // 
+            this.getSysInfBut.Location = new System.Drawing.Point(485, 114);
+            this.getSysInfBut.Name = "getSysInfBut";
+            this.getSysInfBut.Size = new System.Drawing.Size(89, 37);
+            this.getSysInfBut.TabIndex = 16;
+            this.getSysInfBut.Text = "инфор. о уд. системе";
+            this.getSysInfBut.UseVisualStyleBackColor = true;
+            this.getSysInfBut.Click += new System.EventHandler(this.getSysInfBut_Click);
+            // 
             // Jokes
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(595, 324);
+            this.Controls.Add(this.getSysInfBut);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.unblockMachine);
             this.Controls.Add(this.blockMachine);
@@ -254,5 +266,6 @@
         private System.Windows.Forms.Button blockMachine;
         private System.Windows.Forms.Button unblockMachine;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Button getSysInfBut;
     }
 }

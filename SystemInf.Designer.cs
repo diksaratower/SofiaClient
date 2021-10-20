@@ -104,6 +104,7 @@
             this.Controls.Add(this.updateBut);
             this.Name = "SystemInf";
             this.Text = "SystemInf";
+            this.Load += new System.EventHandler(this.SystemInf_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
