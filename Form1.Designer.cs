@@ -45,6 +45,7 @@
             this.screenTraslBut = new System.Windows.Forms.Button();
             this.jokesButton = new System.Windows.Forms.Button();
             this.DisconnectBtn = new System.Windows.Forms.Button();
+            this.CmdButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // ConnectButton
@@ -206,11 +207,22 @@
             this.DisconnectBtn.UseVisualStyleBackColor = true;
             this.DisconnectBtn.Click += new System.EventHandler(this.DisconnectBtn_Click);
             // 
+            // CmdButton
+            // 
+            this.CmdButton.Location = new System.Drawing.Point(582, 270);
+            this.CmdButton.Name = "CmdButton";
+            this.CmdButton.Size = new System.Drawing.Size(88, 32);
+            this.CmdButton.TabIndex = 17;
+            this.CmdButton.Text = "Консоль";
+            this.CmdButton.UseVisualStyleBackColor = true;
+            this.CmdButton.Click += new System.EventHandler(this.CmdButton_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(738, 395);
+            this.Controls.Add(this.CmdButton);
             this.Controls.Add(this.DisconnectBtn);
             this.Controls.Add(this.jokesButton);
             this.Controls.Add(this.screenTraslBut);
@@ -255,6 +267,7 @@
         private System.Windows.Forms.Button screenTraslBut;
         private System.Windows.Forms.Button jokesButton;
         private System.Windows.Forms.Button DisconnectBtn;
+        private System.Windows.Forms.Button CmdButton;
     }
 }
 
