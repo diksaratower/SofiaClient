@@ -26,7 +26,7 @@ namespace BackdoorClient
         {
             if (!mainForm.TestConnect())
             {
-                MessageBox.Show("Дебил нет связи, подключись!", "Мамка твоя", MessageBoxButtons.OK, MessageBoxIcon.Error);
+              
                 this.Close();
                 return;
             }

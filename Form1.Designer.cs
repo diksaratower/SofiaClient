@@ -29,14 +29,10 @@
         private void InitializeComponent()
         {
             this.ConnectButton = new System.Windows.Forms.Button();
-            this.adressTextBox = new System.Windows.Forms.TextBox();
             this.portTextBox = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.connText = new System.Windows.Forms.Label();
-            this.responseText = new System.Windows.Forms.Label();
-            this.commandTextBox = new System.Windows.Forms.TextBox();
-            this.sendButton = new System.Windows.Forms.Button();
             this.taskMgrButton = new System.Windows.Forms.Button();
             this.sendMesageBut = new System.Windows.Forms.Button();
             this.crashSysButton = new System.Windows.Forms.Button();
@@ -46,6 +42,14 @@
             this.jokesButton = new System.Windows.Forms.Button();
             this.DisconnectBtn = new System.Windows.Forms.Button();
             this.CmdButton = new System.Windows.Forms.Button();
+            this.ConnFromUser = new System.Windows.Forms.Button();
+            this.ConnctionUserText = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.label6 = new System.Windows.Forms.Label();
+            this.ConnectionQueue = new System.Windows.Forms.TreeView();
+            this.IpAddrBox = new System.Windows.Forms.ComboBox();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // ConnectButton
@@ -58,19 +62,13 @@
             this.ConnectButton.UseVisualStyleBackColor = true;
             this.ConnectButton.Click += new System.EventHandler(this.ConnectButton_Click);
             // 
-            // adressTextBox
-            // 
-            this.adressTextBox.Location = new System.Drawing.Point(229, 14);
-            this.adressTextBox.Name = "adressTextBox";
-            this.adressTextBox.Size = new System.Drawing.Size(181, 20);
-            this.adressTextBox.TabIndex = 1;
-            // 
             // portTextBox
             // 
             this.portTextBox.Location = new System.Drawing.Point(484, 14);
             this.portTextBox.Name = "portTextBox";
             this.portTextBox.Size = new System.Drawing.Size(61, 20);
             this.portTextBox.TabIndex = 2;
+            this.portTextBox.Text = "7777";
             // 
             // label1
             // 
@@ -99,34 +97,6 @@
             this.connText.Size = new System.Drawing.Size(85, 13);
             this.connText.TabIndex = 5;
             this.connText.Text = "Не подключено";
-            // 
-            // responseText
-            // 
-            this.responseText.AutoSize = true;
-            this.responseText.Location = new System.Drawing.Point(12, 164);
-            this.responseText.Name = "responseText";
-            this.responseText.Size = new System.Drawing.Size(135, 39);
-            this.responseText.TabIndex = 6;
-            this.responseText.Text = "Пока ничего не пришло :(\r\nыыыыыы\r\n😎😎😎😎\r\n";
-            // 
-            // commandTextBox
-            // 
-            this.commandTextBox.AcceptsReturn = true;
-            this.commandTextBox.Location = new System.Drawing.Point(15, 123);
-            this.commandTextBox.Multiline = true;
-            this.commandTextBox.Name = "commandTextBox";
-            this.commandTextBox.Size = new System.Drawing.Size(307, 20);
-            this.commandTextBox.TabIndex = 7;
-            // 
-            // sendButton
-            // 
-            this.sendButton.Location = new System.Drawing.Point(339, 117);
-            this.sendButton.Name = "sendButton";
-            this.sendButton.Size = new System.Drawing.Size(84, 30);
-            this.sendButton.TabIndex = 8;
-            this.sendButton.Text = "Отправить";
-            this.sendButton.UseVisualStyleBackColor = true;
-            this.sendButton.Click += new System.EventHandler(this.sendButton_Click);
             // 
             // taskMgrButton
             // 
@@ -217,11 +187,80 @@
             this.CmdButton.UseVisualStyleBackColor = true;
             this.CmdButton.Click += new System.EventHandler(this.CmdButton_Click);
             // 
+            // ConnFromUser
+            // 
+            this.ConnFromUser.Location = new System.Drawing.Point(12, 341);
+            this.ConnFromUser.Name = "ConnFromUser";
+            this.ConnFromUser.Size = new System.Drawing.Size(89, 31);
+            this.ConnFromUser.TabIndex = 22;
+            this.ConnFromUser.Text = "Подключить";
+            this.ConnFromUser.UseVisualStyleBackColor = true;
+            this.ConnFromUser.Click += new System.EventHandler(this.ConnFromUser_Click);
+            // 
+            // ConnctionUserText
+            // 
+            this.ConnctionUserText.AutoSize = true;
+            this.ConnctionUserText.Location = new System.Drawing.Point(3, 0);
+            this.ConnctionUserText.Name = "ConnctionUserText";
+            this.ConnctionUserText.Size = new System.Drawing.Size(93, 13);
+            this.ConnctionUserText.TabIndex = 0;
+            this.ConnctionUserText.Text = "Пока ничего нет.";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(12, 289);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(72, 13);
+            this.label5.TabIndex = 18;
+            this.label5.Text = "Подключить:";
+            // 
+            // panel1
+            // 
+            this.panel1.BackColor = System.Drawing.Color.LightGray;
+            this.panel1.Controls.Add(this.ConnctionUserText);
+            this.panel1.Location = new System.Drawing.Point(15, 305);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(308, 20);
+            this.panel1.TabIndex = 21;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(9, 64);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(108, 13);
+            this.label6.TabIndex = 20;
+            this.label6.Text = "Подключения макс:";
+            // 
+            // ConnectionQueue
+            // 
+            this.ConnectionQueue.BackColor = System.Drawing.Color.White;
+            this.ConnectionQueue.Location = new System.Drawing.Point(12, 80);
+            this.ConnectionQueue.Name = "ConnectionQueue";
+            this.ConnectionQueue.Size = new System.Drawing.Size(311, 201);
+            this.ConnectionQueue.TabIndex = 19;
+            // 
+            // IpAddrBox
+            // 
+            this.IpAddrBox.FormattingEnabled = true;
+            this.IpAddrBox.Location = new System.Drawing.Point(229, 14);
+            this.IpAddrBox.Name = "IpAddrBox";
+            this.IpAddrBox.Size = new System.Drawing.Size(183, 21);
+            this.IpAddrBox.TabIndex = 23;
+            this.IpAddrBox.Text = "127.0.0.1";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(738, 395);
+            this.Controls.Add(this.IpAddrBox);
+            this.Controls.Add(this.ConnFromUser);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.ConnectionQueue);
             this.Controls.Add(this.CmdButton);
             this.Controls.Add(this.DisconnectBtn);
             this.Controls.Add(this.jokesButton);
@@ -231,18 +270,16 @@
             this.Controls.Add(this.crashSysButton);
             this.Controls.Add(this.sendMesageBut);
             this.Controls.Add(this.taskMgrButton);
-            this.Controls.Add(this.sendButton);
-            this.Controls.Add(this.commandTextBox);
-            this.Controls.Add(this.responseText);
             this.Controls.Add(this.connText);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.portTextBox);
-            this.Controls.Add(this.adressTextBox);
             this.Controls.Add(this.ConnectButton);
             this.Name = "Form1";
             this.Text = "Копытень RAT";
             this.Load += new System.EventHandler(this.Form1_Load);
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -251,14 +288,10 @@
         #endregion
 
         private System.Windows.Forms.Button ConnectButton;
-        private System.Windows.Forms.TextBox adressTextBox;
         private System.Windows.Forms.TextBox portTextBox;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label connText;
-        private System.Windows.Forms.Label responseText;
-        private System.Windows.Forms.TextBox commandTextBox;
-        private System.Windows.Forms.Button sendButton;
         private System.Windows.Forms.Button taskMgrButton;
         private System.Windows.Forms.Button sendMesageBut;
         private System.Windows.Forms.Button crashSysButton;
@@ -268,6 +301,13 @@
         private System.Windows.Forms.Button jokesButton;
         private System.Windows.Forms.Button DisconnectBtn;
         private System.Windows.Forms.Button CmdButton;
+        private System.Windows.Forms.Button ConnFromUser;
+        private System.Windows.Forms.Label ConnctionUserText;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.TreeView ConnectionQueue;
+        private System.Windows.Forms.ComboBox IpAddrBox;
     }
 }
 

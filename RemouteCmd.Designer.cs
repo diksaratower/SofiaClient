@@ -28,19 +28,20 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(RemouteCmd));
             this.sendButton = new System.Windows.Forms.Button();
             this.commandTextBox = new System.Windows.Forms.TextBox();
             this.responseText = new System.Windows.Forms.Label();
-            this.vScrollBar1 = new System.Windows.Forms.VScrollBar();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.consoleText = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // sendButton
             // 
-            this.sendButton.Location = new System.Drawing.Point(343, 213);
+            this.sendButton.Location = new System.Drawing.Point(386, 268);
             this.sendButton.Name = "sendButton";
-            this.sendButton.Size = new System.Drawing.Size(84, 30);
+            this.sendButton.Size = new System.Drawing.Size(106, 36);
             this.sendButton.TabIndex = 11;
             this.sendButton.Text = "Отправить";
             this.sendButton.UseVisualStyleBackColor = true;
@@ -49,11 +50,11 @@
             // commandTextBox
             // 
             this.commandTextBox.AcceptsReturn = true;
-            this.commandTextBox.Location = new System.Drawing.Point(12, 219);
-            this.commandTextBox.Multiline = true;
+            this.commandTextBox.Location = new System.Drawing.Point(9, 277);
             this.commandTextBox.Name = "commandTextBox";
-            this.commandTextBox.Size = new System.Drawing.Size(307, 20);
+            this.commandTextBox.Size = new System.Drawing.Size(371, 20);
             this.commandTextBox.TabIndex = 10;
+            this.commandTextBox.TextChanged += new System.EventHandler(this.commandTextBox_TextChanged);
             // 
             // responseText
             // 
@@ -63,28 +64,30 @@
             this.responseText.Size = new System.Drawing.Size(0, 13);
             this.responseText.TabIndex = 9;
             // 
-            // vScrollBar1
-            // 
-            this.vScrollBar1.Location = new System.Drawing.Point(379, 21);
-            this.vScrollBar1.Name = "vScrollBar1";
-            this.vScrollBar1.Size = new System.Drawing.Size(20, 186);
-            this.vScrollBar1.TabIndex = 12;
-            this.vScrollBar1.Scroll += new System.Windows.Forms.ScrollEventHandler(this.vScrollBar1_Scroll);
-            // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.consoleText);
             this.panel1.Controls.Add(this.responseText);
             this.panel1.Location = new System.Drawing.Point(12, 21);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(354, 186);
+            this.panel1.Size = new System.Drawing.Size(466, 231);
             this.panel1.TabIndex = 13;
+            // 
+            // consoleText
+            // 
+            this.consoleText.AutoSize = true;
+            this.consoleText.Location = new System.Drawing.Point(15, 10);
+            this.consoleText.MaximumSize = new System.Drawing.Size(440, 0);
+            this.consoleText.Name = "consoleText";
+            this.consoleText.Size = new System.Drawing.Size(439, 52);
+            this.consoleText.TabIndex = 10;
+            this.consoleText.Text = resources.GetString("consoleText.Text");
             // 
             // RemouteCmd
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(442, 253);
-            this.Controls.Add(this.vScrollBar1);
+            this.ClientSize = new System.Drawing.Size(546, 325);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.sendButton);
             this.Controls.Add(this.commandTextBox);
@@ -103,7 +106,7 @@
         private System.Windows.Forms.Button sendButton;
         private System.Windows.Forms.TextBox commandTextBox;
         private System.Windows.Forms.Label responseText;
-        private System.Windows.Forms.VScrollBar vScrollBar1;
         private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Label consoleText;
     }
 }
